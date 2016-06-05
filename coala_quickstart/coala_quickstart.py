@@ -6,6 +6,8 @@ from coala_quickstart.generation.Project import (
 from coala_quickstart.generation.FileGlobs import get_project_files
 from coala_quickstart.generation.Bears import (
     get_bears, filter_relevant_bears, print_relevant_bears, give_bear_help)
+from coala_quickstart.generation.Settings import (
+    generate_settings, write_coafile)
 
 
 def main():
@@ -24,3 +26,6 @@ def main():
     relevant_bears = filter_relevant_bears(all_bears, used_languages)
     print_relevant_bears(printer, relevant_bears)
     give_bear_help(printer, all_bears)
+
+    settings = generate_settings(project_dir, project_files, relevant_bears)
+    write_coafile(printer, project_dir, settings)
