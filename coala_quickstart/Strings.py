@@ -39,3 +39,14 @@ all its contents but exclude your .git directory and all
 .o files. To do this, simply give `src/` for the first
 question and `.git/**,**/*.o` for the second question.
 """.format(glob_help_url)
+
+bear_docs_url = ("https://github.com/coala-analyzer/bear-docs/blob/master/"
+                 "README.rst#supported-languages")
+bear_help = """
+A coala bear is a plugin that contains the checking routines. It may be
+language specific or language independent. This makes coala completely
+modularized and extensible. Many languages including C/C++, Python,
+JavaScript are supported out-of-the-box.
+
+You can see all of them here: {}
+""".format(bear_docs_url)
