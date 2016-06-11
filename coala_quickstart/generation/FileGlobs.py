@@ -1,6 +1,8 @@
 import os
 
 from coalib.parsing.Globbing import glob_escape
+from coalib.misc.Constants import TRUE_STRINGS
+from coala_quickstart.generation.Utilities import get_gitignore_glob
 from coala_utils.Question import ask_question
 from coala_quickstart.Strings import GLOB_HELP
 from coalib.collecting.Collectors import collect_files
@@ -24,10 +26,21 @@ def get_project_files(log_printer, printer, project_dir):
         default="**",
         printer=printer,
         typecast=list)
-    ignore_globs = ask_question(
-        "Which files do you want coala to run on?",
-        printer=printer,
-        typecast=list)
+
+    ignore_globs = None
+    if os.path.isfile(os.path.join(project_dir, ".gitignore")):
+        gitignore_globs = get_gitignore_glob(project_dir)
+        gitignore_globs.append(os.path.join(project_dir, ".git/**"))
+        if ask_question(
+            "Ignore files matching patters in `.gitignore` ?",
+            default="yes",
+                typecast=lambda x: str(x).lower() in TRUE_STRINGS):
+            ignore_globs = gitignore_globs
+    if ignore_globs == None:
+        ignore_globs = ask_question(
+            "Which files do you want coala to run on?",
+            printer=printer,
+            typecast=list)
     printer.print()
 
     escaped_project_dir = glob_escape(project_dir)
