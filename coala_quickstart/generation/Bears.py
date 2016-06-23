@@ -1,5 +1,6 @@
 from pyprint.NullPrinter import NullPrinter
 
+from coalib.misc.Constants import FALSE_STRINGS
 from coala_quickstart.Strings import bear_help
 from coala_quickstart.interaction.Question import ask_question
 from coalib.settings.ConfigurationGathering import load_configuration
@@ -88,12 +89,12 @@ def give_bear_help(printer, all_bears):
     for bear in all_bears:
         bear_name_dict[bear.name.lower()] = bear
 
-    while response.lower() != "none":  # pragma: no branch
+    while response.lower() not in FALSE_STRINGS:  # pragma: no branch
         response = ask_question(
             printer,
             "Which bear would you like to know more about?",
             default="none")
-        if response.lower() == "none":
+        if response.lower() in FALSE_STRINGS:
             break
         if response.lower() not in bear_name_dict:
             printer.print("There isn't a bear named '" + response + "'.")

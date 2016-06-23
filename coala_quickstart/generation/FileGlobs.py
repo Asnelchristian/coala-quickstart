@@ -1,5 +1,6 @@
 import os
 
+from coalib.misc.Constants import TRUE_STRINGS
 from coala_quickstart.generation.Utilities import (
     comma_split, get_gitignore_glob)
 from coala_quickstart.interaction.Question import ask_question
@@ -53,7 +54,7 @@ def get_project_files(log_printer, printer, project_dir):
             printer,
             "Ignore files matching patters in `.gitignore` ?",
             default="yes")
-        if response.lower() == "yes":
+        if response.lower() in TRUE_STRINGS:
             ignore_globs = gitignore_globs
     if ignore_globs == None:
         ignore_globs = ask_glob_list(
