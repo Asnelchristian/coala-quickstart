@@ -1,1 +1,2 @@
 coala_bears>=0.8.0.dev20160705151130
+coala_utils>=0.4.2
