@@ -1,7 +1,7 @@
 import os
 import operator
 
-from coala_quickstart.interaction.Question import ask_question
+from coala_utils.Question import ask_question
 from coala_quickstart.Extensions import exts
 
 
@@ -18,9 +18,9 @@ def get_project_dir(printer):
 
     while not os.path.isdir(project_dir):
         project_dir = ask_question(
-            printer,
             "What is your project directory?",
-            default=os.getcwd())
+            default=os.getcwd(),
+            prefill=True)
         project_dir = os.path.abspath(os.path.expanduser(project_dir))
         if not os.path.isdir(project_dir):
             printer.print("Please enter a valid directory", color="blue")
